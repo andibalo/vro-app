@@ -7,6 +7,8 @@ import { useFonts } from 'expo-font'
 import { SplashScreen, Stack } from 'expo-router'
 import { Provider } from './Provider'
 import { useTheme } from 'tamagui'
+import { Provider as ReduxProvider } from 'react-redux'
+import { store } from 'redux/store'
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -46,7 +48,11 @@ export default function RootLayout() {
 }
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
-  return <Provider>{children}</Provider>
+  return (
+    <ReduxProvider store={store}>
+      <Provider>{children}</Provider>
+    </ReduxProvider>
+  )
 }
 
 function RootLayoutNav() {
@@ -85,6 +91,24 @@ function RootLayoutNav() {
           name="transaction/pulsa"
           options={{
             headerTitle: "Isi Pulsa"
+          }}
+        />
+        <Stack.Screen
+          name="transaction/pin-validation"
+          options={{
+            headerTitle: "Input PIN"
+          }}
+        />
+        <Stack.Screen
+          name="transaction/transaction-fail"
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name="transaction/transaction-success"
+          options={{
+            headerShown: false
           }}
         />
         <Stack.Screen

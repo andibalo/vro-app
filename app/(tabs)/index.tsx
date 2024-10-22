@@ -1,6 +1,4 @@
-import { TRANSACTION_TYPE_BPJS } from 'constants'
-import { TRANSACTION_TYPE_PULSA } from 'constants'
-import { TRANSACTION_TYPE_PLN_TOKEN } from 'constants'
+import { TRANSACTION_TYPE_BPJS, TRANSACTION_TYPE_PLN_TOKEN, TRANSACTION_TYPE_PULSA } from '../../constants'
 import { useNavigation, useRouter } from 'expo-router'
 import { Pressable } from 'react-native'
 import { Text, View, Image, XStack, YStack , Input} from 'tamagui'
