@@ -9,6 +9,7 @@ import { TransactionStatus } from '../../types'
 import { nanoid } from '@reduxjs/toolkit';
 import dayjs from 'dayjs'
 import { plnTokenItemsList } from './pln';
+import { bpjsItemsList } from './bpjs';
 
 export default function PINValidationScreen() {
     const { transactionType, itemID } = useLocalSearchParams<{ transactionType: string, itemID: string }>()
@@ -19,14 +20,16 @@ export default function PINValidationScreen() {
 
     useEffect(() => {
         if (transactionType === TRANSACTION_TYPE_PLN_TOKEN) {
-            const itemData = plnTokenItemsList.find(item => item.id === itemID)
+            const plnItemData = plnTokenItemsList.find(item => item.id === itemID)
 
-            setItemData(itemData)
+            setItemData(plnItemData)
             return
         }
 
         if (transactionType === TRANSACTION_TYPE_BPJS) {
+            const bpjsItemData = bpjsItemsList.find(item => item.id === itemID)
 
+            setItemData(bpjsItemData)
             return
         }
 
@@ -38,8 +41,6 @@ export default function PINValidationScreen() {
 
     useEffect(() => {
         if (attemptCount === 3) {
-            console.log("TRANSACTION FAILED")
-
             let trxID = 'TXN-' + nanoid()
 
             dispatch(addTransaction({
@@ -52,7 +53,7 @@ export default function PINValidationScreen() {
             }))
 
             // @ts-ignore
-            navigation.navigate("transaction/transaction-fail", {
+            navigation.navigate("transaction/transaction-complete", {
                 trxID
             })
         }
@@ -76,7 +77,7 @@ export default function PINValidationScreen() {
         }))
 
         // @ts-ignore
-        navigation.navigate("transaction/transaction-success", {
+        navigation.navigate("transaction/transaction-complete", {
             trxID
         })
     }

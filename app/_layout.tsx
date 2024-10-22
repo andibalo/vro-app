@@ -100,13 +100,7 @@ function RootLayoutNav() {
           }}
         />
         <Stack.Screen
-          name="transaction/transaction-fail"
-          options={{
-            headerShown: false
-          }}
-        />
-        <Stack.Screen
-          name="transaction/transaction-success"
+          name="transaction/transaction-complete"
           options={{
             headerShown: false
           }}

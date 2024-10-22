@@ -1,5 +1,5 @@
-import { Link, Tabs } from 'expo-router'
-import { Button, useTheme } from 'tamagui'
+import { Tabs } from 'expo-router'
+import { useTheme } from 'tamagui'
 import { Home, History, User } from '@tamagui/lucide-icons'
 
 export default function TabLayout() {
@@ -25,7 +25,7 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <Home color={color} />,
-          headerTitle:"Hello, Andi"
+          headerTitle: "Hello, Andi"
         }}
       />
       <Tabs.Screen

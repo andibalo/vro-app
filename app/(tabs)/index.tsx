@@ -12,8 +12,9 @@ export default function HomeScreen() {
       <View px="$4" mb="$5">
         <Image
           source={{
-            uri: 'https://picsum.photos/200/300'
+            uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfV2GyCSwmSCHxh_LzfdPkB9ANHUNkuL2Pow&s'
           }}
+          objectFit="contain"
           width="100%"
           height={200}
           borderRadius="$3"

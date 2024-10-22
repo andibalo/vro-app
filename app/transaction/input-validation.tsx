@@ -19,12 +19,31 @@ const transactionTypeToInputTitleMap = {
     [TRANSACTION_TYPE_PLN_TOKEN]: "ID Pelanggan",
 }
 
+
+// yup.addMethod(yup.string, "creditCardType", function (errorMessage) {
+//     return this.test(`test-card-type`, errorMessage, function (value) {
+//       const { path, createError } = this;
+
+//       return (
+//         getCardType(value).length > 0 ||
+//         createError({ path, message: errorMessage })
+//       );
+//     });
+//   });
+
 const plnSchema = yup.object().shape({
-    numInput: yup.string().required('ID Pelanggan is required'),
+    numInput: yup.
+        string().
+        required('ID Pelanggan is required').
+        test("doesNotStartWithZero", "First number must not be a 0", val => val.charAt(0) !== "0"),
 });
 
 const bpjsSchema = yup.object().shape({
-    numInput: yup.string().required('ID Pelanggan is required'),
+    numInput: yup.
+        string().
+        required('Nomor BPJS is required').
+        test("startWithZero", "First number must be a 0", val => val.charAt(0) === "0").
+        test("len13", "Must be exactly 13 characters", val => val.length === 13),
 });
 
 const pulsaSchema = yup.object().shape({

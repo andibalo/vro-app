@@ -96,8 +96,8 @@ export default function PLNTransactionScreen() {
                                     >
                                         <Pressable onPress={() => handleOnItemPress(item)}>
                                             <View p="$3" w="100%" h="100%">
-                                                <Text fontSize={18} fontWeight="bold" mb="$3">{item.valueName}</Text>
-                                                <Text>{formatNumberToRupiah(item.value)}</Text>
+                                                <Text color={item.id === currentPickedItem?.id ? "$blue10" : "black"} fontSize={18} fontWeight="bold" mb="$3">{item.valueName}</Text>
+                                                <Text color={item.id === currentPickedItem?.id ? "$blue10" : "black"}>{formatNumberToRupiah(item.value)}</Text>
                                             </View>
                                         </Pressable>
                                     </View>
