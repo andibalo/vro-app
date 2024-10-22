@@ -1,11 +1,12 @@
 import { TRANSACTION_TYPE_BPJS, TRANSACTION_TYPE_PLN_TOKEN, TRANSACTION_TYPE_PULSA } from '../../constants'
-import { useNavigation, useRouter } from 'expo-router'
+import { useNavigation } from 'expo-router'
 import { Pressable } from 'react-native'
-import { Text, View, Image, XStack, YStack , Input} from 'tamagui'
+import { Text, View, Image, XStack, YStack } from 'tamagui'
+import { Smartphone } from '@tamagui/lucide-icons'
 
 export default function HomeScreen() {
   const navigation = useNavigation()
-  const router = useRouter();
+
   return (
     <View flex={1} bg="$background">
       <View px="$4" mb="$5">
@@ -40,20 +41,18 @@ export default function HomeScreen() {
               >
                 <YStack gap="$2" alignItems='center'>
                   <Image
-                    source={{
-                      uri: 'https://picsum.photos/50/50'
-                    }}
+                    source={{ width: 30, height: 30, uri: "https://kioslambang.wordpress.com/wp-content/uploads/2011/11/wpid-logo_pln.jpg" }}
                     width={30}
                     height={30}
-
+                    objectFit="contain"
                   />
                   <Text fontSize={12}>PLN Token</Text>
                 </YStack>
               </View>
             </Pressable>
             <Pressable onPress={() => {
-               //@ts-ignore
-               navigation.navigate("transaction/input-validation", {
+              //@ts-ignore
+              navigation.navigate("transaction/input-validation", {
                 transactionType: TRANSACTION_TYPE_PULSA,
                 headerTitle: "Pulsa"
               })
@@ -68,21 +67,14 @@ export default function HomeScreen() {
                 alignItems='center'
               >
                 <YStack gap="$2" alignItems='center'>
-                  <Image
-                    source={{
-                      uri: 'https://picsum.photos/50/50'
-                    }}
-                    width={30}
-                    height={30}
-
-                  />
+                  <Smartphone size="$2" />
                   <Text fontSize={12}>Pulsa</Text>
                 </YStack>
               </View>
             </Pressable>
             <Pressable onPress={() => {
-               //@ts-ignore
-               navigation.navigate("transaction/input-validation", {
+              //@ts-ignore
+              navigation.navigate("transaction/input-validation", {
                 transactionType: TRANSACTION_TYPE_BPJS,
                 headerTitle: "BPJS"
               })
@@ -98,12 +90,9 @@ export default function HomeScreen() {
               >
                 <YStack gap="$2" alignItems='center'>
                   <Image
-                    source={{
-                      uri: 'https://picsum.photos/50/50'
-                    }}
+                    source={{ width: 30, height: 30, uri: "https://mpp.palembang.go.id/static/logo/1661780974.png.png" }}
                     width={30}
                     height={30}
-
                   />
                   <Text fontSize={12}>BPJS</Text>
                 </YStack>

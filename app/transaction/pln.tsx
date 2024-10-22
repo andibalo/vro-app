@@ -1,4 +1,4 @@
-import { formatNumberToRupiah } from 'utils'
+import { formatNumberToRupiah } from '../../utils'
 import { useLocalSearchParams, useNavigation } from 'expo-router'
 import { useState } from 'react'
 import { Pressable } from 'react-native';
@@ -6,6 +6,7 @@ import { Text, View, Input, YStack, Button, XStack } from 'tamagui'
 
 interface PLNTokenItem {
     id: string;
+    name: string;
     value: number;
     valueName: string;
 }
@@ -13,39 +14,43 @@ interface PLNTokenItem {
 export const plnTokenItemsList: PLNTokenItem[] = [
     {
         id: 'pln-20rb',
+        name: "PLN Token 20.000",
         value: 20000,
         valueName: '20.000',
 
     },
     {
         id: 'pln-50rb',
+        name: "PLN Token 50.000",
         value: 50000,
         valueName: '50.000',
 
     },
     {
         id: 'pln-100rb',
+        name: "PLN Token 100.000",
         value: 100000,
         valueName: '100.000',
 
     },
     {
         id: 'pln-200rb',
+        name: "PLN Token 200.000",
         value: 200000,
         valueName: '200.000',
 
     },
     {
         id: 'pln-500rb',
+        name: "PLN Token 500.000",
         value: 500000,
         valueName: '500.000',
-
     },
     {
         id: 'pln-1jt',
+        name: "PLN Token 1.000.000",
         value: 1000000,
         valueName: '1.000.000',
-
     },
 ]
 
@@ -59,8 +64,6 @@ export default function PLNTransactionScreen() {
     }
 
     const handleOnSubmit = () => {
-        console.log(currentPickedItem, "SUBMIT")
-
         // @ts-ignore
         navigation.navigate("transaction/pin-validation", {
             transactionType,

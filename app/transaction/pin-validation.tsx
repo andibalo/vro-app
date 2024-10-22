@@ -1,18 +1,40 @@
 import { useLocalSearchParams, useNavigation } from 'expo-router'
 import { Text, View } from 'tamagui'
 import { OtpInput } from "react-native-otp-entry";
-import { BIRTH_DATE_PIN } from '../../constants';
+import { BIRTH_DATE_PIN, TRANSACTION_TYPE_BPJS, TRANSACTION_TYPE_PLN_TOKEN, TRANSACTION_TYPE_PULSA } from '../../constants';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTransaction } from 'redux/slice/transaction';
+import { addTransaction } from '../../redux/slice/transaction';
 import { TransactionStatus } from '../../types'
 import { nanoid } from '@reduxjs/toolkit';
+import dayjs from 'dayjs'
+import { plnTokenItemsList } from './pln';
 
 export default function PINValidationScreen() {
     const { transactionType, itemID } = useLocalSearchParams<{ transactionType: string, itemID: string }>()
     const [attemptCount, setAttemptCount] = useState<number>(0)
+    const [itemData, setItemData] = useState<any>({})
     const dispatch = useDispatch()
     const navigation = useNavigation()
+
+    useEffect(() => {
+        if (transactionType === TRANSACTION_TYPE_PLN_TOKEN) {
+            const itemData = plnTokenItemsList.find(item => item.id === itemID)
+
+            setItemData(itemData)
+            return
+        }
+
+        if (transactionType === TRANSACTION_TYPE_BPJS) {
+
+            return
+        }
+
+        if (transactionType === TRANSACTION_TYPE_PULSA) {
+
+            return
+        }
+    }, [])
 
     useEffect(() => {
         if (attemptCount === 3) {
@@ -23,10 +45,10 @@ export default function PINValidationScreen() {
             dispatch(addTransaction({
                 id: trxID,
                 type: transactionType,
-                name: "PLN 30rb",
-                value: 20000,
+                name: itemData.name,
+                value: itemData.value,
                 status: TransactionStatus.Failed,
-                createdAt: Date.now().toString()
+                createdAt: dayjs().toISOString()
             }))
 
             // @ts-ignore
@@ -42,16 +64,15 @@ export default function PINValidationScreen() {
             return
         }
 
-
         let trxID = 'TXN-' + nanoid()
 
         dispatch(addTransaction({
             id: trxID,
             type: transactionType,
-            name: "PLN 30rb",
-            value: 20000,
+            name: itemData.name,
+            value: itemData.value,
             status: TransactionStatus.Success,
-            createdAt: Date.now().toString()
+            createdAt: dayjs().toISOString()
         }))
 
         // @ts-ignore

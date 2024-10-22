@@ -8,7 +8,7 @@ const transactionSlice = createSlice({
     initialState,
     reducers: {
         addTransaction: (state, action: PayloadAction<ITransaction>) => {
-            state.push(action.payload)
+            state.unshift(action.payload)
         }
     }
 })
