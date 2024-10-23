@@ -39,7 +39,6 @@ export default function TransactionHistoryScreen() {
           <View flex={1} justifyContent="center" alignItems="center">
             <Text fontSize={24} fontWeight="bold" color="$blue10">No Transactions Found</Text>
           </View>
-
       }
     </View>
   )

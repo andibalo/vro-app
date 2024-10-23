@@ -59,8 +59,8 @@ export default function PLNTransactionScreen() {
     const { data, transactionType } = useLocalSearchParams<{ transactionType: string, data: string }>()
     const navigation = useNavigation()
 
-    const handleOnItemPress = (data: PLNTokenItem) => {
-        setCurrentPickedItem(data)
+    const handleOnItemPress = (itemData: PLNTokenItem) => {
+        setCurrentPickedItem(itemData)
     }
 
     const handleOnSubmit = () => {

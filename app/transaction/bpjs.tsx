@@ -54,8 +54,8 @@ export default function BPJSTransactionScreen() {
     const { data, transactionType } = useLocalSearchParams<{ transactionType: string, data: string }>()
     const navigation = useNavigation()
 
-    const handleOnItemPress = (data: BPJSItem) => {
-        setCurrentPickedItem(data)
+    const handleOnItemPress = (itemData: BPJSItem) => {
+        setCurrentPickedItem(itemData)
     }
 
     const handleOnSubmit = () => {

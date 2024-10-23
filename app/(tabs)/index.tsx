@@ -12,11 +12,11 @@ export default function HomeScreen() {
       <View px="$4" mb="$5">
         <Image
           source={{
-            uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfV2GyCSwmSCHxh_LzfdPkB9ANHUNkuL2Pow&s'
+            uri: 'https://instagram.fcgk29-1.fna.fbcdn.net/v/t51.29350-15/458247547_1825181968308672_1266800076748340272_n.heic?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMDgweDEwODAuc2RyLmYyOTM1MC5kZWZhdWx0X2ltYWdlIn0&_nc_ht=instagram.fcgk29-1.fna.fbcdn.net&_nc_cat=100&_nc_ohc=acDoW1PvJQwQ7kNvgGgR6U_&_nc_gid=943450fcc392469dad39ef7428fa6043&edm=APoiHPcBAAAA&ccb=7-5&ig_cache_key=MzQ0NzYxMjk2OTU2MTU3NTYyMQ%3D%3D.3-ccb7-5&oh=00_AYD3lj8QNbj9dQfAPH8F9judrKtyxtwdQMLTSe9NWjjsaA&oe=671D76BF&_nc_sid=22de04'
           }}
           objectFit="contain"
           width="100%"
-          height={200}
+          height={250}
           borderRadius="$3"
         />
       </View>

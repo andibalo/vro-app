@@ -1,5 +1,5 @@
 import { ChevronRight } from '@tamagui/lucide-icons'
-import { Text, View, YStack, Avatar, XStack, Separator, Switch } from 'tamagui'
+import { Text, View, YStack, Avatar, XStack, Separator, Switch, Image } from 'tamagui'
 
 export default function ProfileScreen() {
     return (
@@ -35,7 +35,17 @@ export default function ProfileScreen() {
                         <Switch.Thumb animation="quicker" />
                     </Switch>
                 </XStack>
-                <Separator my="$2"/>
+                <Separator my="$2" />
+                <Image
+                    source={{
+                        uri: 'https://instagram.fcgk30-1.fna.fbcdn.net/v/t51.29350-15/463430013_603614238658016_4358786665606957215_n.webp?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMDgweDEwODAuc2RyLmYyOTM1MC5kZWZhdWx0X2ltYWdlIn0&_nc_ht=instagram.fcgk30-1.fna.fbcdn.net&_nc_cat=108&_nc_ohc=gJnKX_WAdxEQ7kNvgF0OhV8&_nc_gid=44bc89f9de45423aacd431881957a990&edm=APoiHPcBAAAA&ccb=7-5&ig_cache_key=MzQ4MDE5NjA0MzkzMTMzODY4MA%3D%3D.3-ccb7-5&oh=00_AYBz_kHcu2DdBpPhgdhUe286GkUljKAUxJzUqsmmsz8YaQ&oe=671D6333&_nc_sid=22de04'
+                    }}
+                    objectFit="contain"
+                    width="100%"
+                    height={250}
+                    borderRadius="$3"
+                    mt="$3"
+                />
             </YStack>
         </View>
     )

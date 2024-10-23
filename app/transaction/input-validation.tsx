@@ -1,5 +1,5 @@
 
-import { TRANSACTION_TYPE_BPJS, TRANSACTION_TYPE_PLN_TOKEN, TRANSACTION_TYPE_PULSA } from '../../constants'
+import { isValidINDPhoneOperatorPrefix, TRANSACTION_TYPE_BPJS, TRANSACTION_TYPE_PLN_TOKEN, TRANSACTION_TYPE_PULSA } from '../../constants'
 import { useLocalSearchParams, useNavigation } from 'expo-router'
 import { useEffect, useState } from 'react'
 import { Text, View, YStack, Button, Input } from 'tamagui'
@@ -19,18 +19,6 @@ const transactionTypeToInputTitleMap = {
     [TRANSACTION_TYPE_PLN_TOKEN]: "ID Pelanggan",
 }
 
-
-// yup.addMethod(yup.string, "creditCardType", function (errorMessage) {
-//     return this.test(`test-card-type`, errorMessage, function (value) {
-//       const { path, createError } = this;
-
-//       return (
-//         getCardType(value).length > 0 ||
-//         createError({ path, message: errorMessage })
-//       );
-//     });
-//   });
-
 const plnSchema = yup.object().shape({
     numInput: yup.
         string().
@@ -47,7 +35,14 @@ const bpjsSchema = yup.object().shape({
 });
 
 const pulsaSchema = yup.object().shape({
-    numInput: yup.string().required('ID Pelanggan is required'),
+    numInput: yup.
+        string().
+        required('Nomor Telepon is required').
+        test("startWithZeroEight", "Number must start with 08", val => val.slice(0, 2) === "08").
+        test("validINDOperatorPrefix", "Must be valid phone operator prefix in Indonesia", (val) => {
+            let phonePrefix = isValidINDPhoneOperatorPrefix.find(prefix => prefix === val.slice(0, 4))
+            return !!phonePrefix
+        }),
 });
 
 
