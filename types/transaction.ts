@@ -5,10 +5,12 @@ export enum TransactionStatus {
 
 export interface ITransaction {
     id: string;
+    number: string;
     type: string;
     name: string;
     value: number;
     status: TransactionStatus;
     createdAt: string;
-    operatorProviderName?: string;
+    phoneOperatorName?: string;
+    phoneOperatorImgURL?: string;
 }

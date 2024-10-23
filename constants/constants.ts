@@ -62,7 +62,7 @@ export const isValidINDPhoneOperatorPrefix: string[] = [
     "0887", "0888", "0889", "0828", "0868"
 ]
 
-export const phonePrefixToINDOperatorMap = {
+export const phonePrefixToINDOperatorMap : Record<string, IPhoneOperator> = {
     "0852": OPERATOR_TELKOMSEL,
     "0853": OPERATOR_TELKOMSEL,
     "0811": OPERATOR_TELKOMSEL,

@@ -2,7 +2,7 @@ import { formatNumberToRupiah } from '../../utils'
 import { useLocalSearchParams, useNavigation } from 'expo-router'
 import { useState } from 'react'
 import { Pressable } from 'react-native';
-import { Text, View, Input, YStack, Button, XStack } from 'tamagui'
+import { Text, View, Input, YStack, Button, XStack, ScrollView } from 'tamagui'
 
 interface PLNTokenItem {
     id: string;
@@ -67,6 +67,7 @@ export default function PLNTransactionScreen() {
         // @ts-ignore
         navigation.navigate("transaction/pin-validation", {
             transactionType,
+            data,
             itemID: currentPickedItem?.id
         })
     }
@@ -82,29 +83,32 @@ export default function PLNTransactionScreen() {
                             readOnly
                         />
                     </View>
-                    <YStack gap="$3" flex={1} mt="$5">
-                        <XStack flex={1} gap="$3" flexDirection='row' flexWrap="wrap">
-                            {
-                                plnTokenItemsList.map((item: PLNTokenItem) => (
-                                    <View
-                                        key={item.id}
-                                        height={100}
-                                        width="48%"
-                                        borderWidth={1}
-                                        borderColor={item.id === currentPickedItem?.id ? "$blue10" : "$black10"}
-                                        borderRadius="$3"
-                                    >
-                                        <Pressable onPress={() => handleOnItemPress(item)}>
-                                            <View p="$3" w="100%" h="100%">
-                                                <Text color={item.id === currentPickedItem?.id ? "$blue10" : "black"} fontSize={18} fontWeight="bold" mb="$3">{item.valueName}</Text>
-                                                <Text color={item.id === currentPickedItem?.id ? "$blue10" : "black"}>{formatNumberToRupiah(item.value)}</Text>
-                                            </View>
-                                        </Pressable>
-                                    </View>
-                                ))
-                            }
-                        </XStack>
-                    </YStack>
+                    <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
+                        <YStack gap="$3" flex={1}>
+                            <XStack flex={1} gap="$3" flexDirection='row' flexWrap="wrap">
+                                {
+                                    plnTokenItemsList.map((item: PLNTokenItem) => (
+                                        <View
+                                            key={item.id}
+                                            height={100}
+                                            width="48%"
+                                            borderWidth={1}
+                                            borderColor={item.id === currentPickedItem?.id ? "$blue10" : "$black10"}
+                                            borderRadius="$3"
+                                        >
+                                            <Pressable onPress={() => handleOnItemPress(item)}>
+                                                <View p="$3" w="100%" h="100%">
+                                                    <Text color={item.id === currentPickedItem?.id ? "$blue10" : "black"} fontSize={18} fontWeight="bold" mb="$2">{item.valueName}</Text>
+                                                    <Text fontSize={12} color={item.id === currentPickedItem?.id ? "$blue10" : "$gray10"}>Price</Text>
+                                                    <Text color={item.id === currentPickedItem?.id ? "$blue10" : "black"}>{formatNumberToRupiah(item.value)}</Text>
+                                                </View>
+                                            </Pressable>
+                                        </View>
+                                    ))
+                                }
+                            </XStack>
+                        </YStack>
+                    </ScrollView>
                 </View>
                 <View>
                     <Button theme="active" backgroundColor={"$blue10"} color="white" onPress={handleOnSubmit}>Continue</Button>

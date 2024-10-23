@@ -1,5 +1,8 @@
-import { Text, View } from 'tamagui'
-
+import { useLocalSearchParams, useNavigation } from 'expo-router';
+import { useState } from 'react';
+import { Pressable } from 'react-native';
+import { Text, View, Input, YStack, Button, XStack, ScrollView } from 'tamagui'
+import { formatNumberToRupiah } from '../../utils'
 interface PulsaItem {
     id: string;
     name: string;
@@ -74,12 +77,66 @@ export const pulsaItemsList: PulsaItem[] = [
     },
 ]
 
-export default function PulsaScreen() {
+export default function PulsaTransactionScreen() {
+    const [currentPickedItem, setCurrentPickedItem] = useState<PulsaItem | null>(null)
+    const { data, transactionType } = useLocalSearchParams<{ transactionType: string, data: string }>()
+    const navigation = useNavigation()
+
+    const handleOnItemPress = (itemData: PulsaItem) => {
+        setCurrentPickedItem(itemData)
+    }
+
+    const handleOnSubmit = () => {
+        // @ts-ignore
+        navigation.navigate("transaction/pin-validation", {
+            transactionType,
+            data,
+            itemID: currentPickedItem?.id
+        })
+    }
+
     return (
-        <View flex={1} alignItems="center" justifyContent="center" bg="$background">
-            <Text fontSize={20} color="$blue10">
-                Pulsa
-            </Text>
-        </View>
+        <View flex={1} bg="$background" px="$4" py="$3">
+            <YStack flex={1} justifyContent="space-between">
+                <View mt="$4" flex={1}>
+                    <View>
+                        <Text mb="$2">Nomor Telepon</Text>
+                        <Input
+                            value={data}
+                            readOnly
+                        />
+                    </View>
+                    <ScrollView contentContainerStyle={{ paddingVertical: 20 }} >
+                        <YStack gap="$3" flex={1} >
+                            <XStack flex={1} gap="$3" flexDirection='row' flexWrap="wrap">
+                                {
+                                    pulsaItemsList.map((item: PulsaItem) => (
+                                        <View
+                                            key={item.id}
+                                            height={100}
+                                            width="48%"
+                                            borderWidth={1}
+                                            borderColor={item.id === currentPickedItem?.id ? "$blue10" : "$black10"}
+                                            borderRadius="$3"
+                                        >
+                                            <Pressable onPress={() => handleOnItemPress(item)}>
+                                                <View p="$3" w="100%" h="100%">
+                                                    <Text color={item.id === currentPickedItem?.id ? "$blue10" : "black"} fontSize={18} fontWeight="bold" mb="$2">{item.valueName}</Text>
+                                                    <Text fontSize={12} color={item.id === currentPickedItem?.id ? "$blue10" : "$gray10"}>Price</Text>
+                                                    <Text color={item.id === currentPickedItem?.id ? "$blue10" : "black"}>{formatNumberToRupiah(item.value)}</Text>
+                                                </View>
+                                            </Pressable>
+                                        </View>
+                                    ))
+                                }
+                            </XStack>
+                        </YStack>
+                    </ScrollView>
+                </View>
+                <View>
+                    <Button theme="active" backgroundColor={"$blue10"} color="white" onPress={handleOnSubmit}>Continue</Button>
+                </View>
+            </YStack >
+        </View >
     )
 }
