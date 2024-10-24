@@ -42,6 +42,24 @@ export default function ConfirmTransactionScreen() {
         phonePrefix = data.slice(0, 4)
     }
 
+    const resolveImageURI = (transactionType: string): string => {
+
+        if (transactionType === TRANSACTION_TYPE_PLN_TOKEN) {
+            return "https://kioslambang.wordpress.com/wp-content/uploads/2011/11/wpid-logo_pln.jpg"
+        }
+
+        if (transactionType === TRANSACTION_TYPE_BPJS) {
+            return "https://mpp.palembang.go.id/static/logo/1661780974.png.png"
+        }
+
+        if (transactionType === TRANSACTION_TYPE_PULSA) {
+            return phonePrefixToINDOperatorMap[phonePrefix].imgURL || ""
+        }
+
+        return ""
+    }
+
+
     const handleOnSubmit = () => {
         // @ts-ignore
         navigation.navigate("transaction/pin-validation", {
@@ -64,19 +82,16 @@ export default function ConfirmTransactionScreen() {
                     </View>
                     <View>
                         <Text fontSize={18} fontWeight="bold" mb="$3">Transaction Detail</Text>
-                        {
-                            transactionType === TRANSACTION_TYPE_PULSA &&
-                            <XStack justifyContent="center" mb="$3">
-                                <Image
-                                    source={{
-                                        uri: phonePrefixToINDOperatorMap[phonePrefix].imgURL
-                                    }}
-                                    objectFit="contain"
-                                    width="100%"
-                                    height={100}
-                                />
-                            </XStack>
-                        }
+                        <XStack justifyContent="center" mb="$3">
+                            <Image
+                                source={{
+                                    uri: resolveImageURI(transactionType)
+                                }}
+                                objectFit="contain"
+                                width="100%"
+                                height={100}
+                            />
+                        </XStack>
                         <YStack gap="$2">
                             {
                                 transactionType === TRANSACTION_TYPE_PULSA &&
@@ -102,7 +117,7 @@ export default function ConfirmTransactionScreen() {
                         </YStack>
                         <Separator my={"$2"} />
                         <XStack justifyContent="space-between" alignItems="center" >
-                            <Text fontSize={16} >
+                            <Text fontSize={16} fontWeight="bold">
                                 Total Payment
                             </Text>
                             <Text fontSize={16} fontWeight="bold">{formatNumberToRupiah(itemData.value)}</Text>

@@ -76,6 +76,12 @@ function RootLayoutNav() {
           }}
         />
         <Stack.Screen
+          name="transaction/detail"
+          options={{
+            headerTitle: "Transaction Detail"
+          }}
+        />
+        <Stack.Screen
           name="transaction/bpjs"
           options={{
             headerTitle: "Bayar BPJS"
