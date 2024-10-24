@@ -2,7 +2,7 @@ import { useLocalSearchParams, useNavigation } from 'expo-router'
 import { Text, View } from 'tamagui'
 import { OtpInput } from "react-native-otp-entry";
 import { BIRTH_DATE_PIN, phonePrefixToINDOperatorMap, TRANSACTION_TYPE_BPJS, TRANSACTION_TYPE_PLN_TOKEN, TRANSACTION_TYPE_PULSA } from '../../constants';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTransaction } from '../../redux/slice/transaction';
 import { ITransaction, TransactionStatus } from '../../types'
@@ -13,6 +13,7 @@ import { bpjsItemsList } from './bpjs';
 import { pulsaItemsList } from './pulsa';
 import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withRepeat, withSequence, withSpring, withTiming } from 'react-native-reanimated'
 import { useTranslation } from 'react-i18next';
+import { ThemeContext } from '../../context';
 
 export default function PINValidationScreen() {
     const { transactionType, itemID, data } = useLocalSearchParams<{ transactionType: string, itemID: string, data: string }>()
@@ -20,6 +21,13 @@ export default function PINValidationScreen() {
     const [itemData, setItemData] = useState<any>({})
     const [isInputWrong, setIsInputWrong] = useState(false)
     const { t } = useTranslation();
+    const themeContext = useContext(ThemeContext);
+
+    if (!themeContext) {
+        throw new Error(
+            "PINValidationScreen has to be used within <ThemeContext.Provider>"
+        );
+    }
 
     const dispatch = useDispatch()
     const navigation = useNavigation()
@@ -157,6 +165,9 @@ export default function PINValidationScreen() {
                         numberOfDigits={6}
                         onFilled={handlePINOnFilled}
                         theme={{
+                            pinCodeTextStyle: {
+                              color: themeContext.theme === "dark" ? "white" : "black"  
+                            },
                             pinCodeContainerStyle: {
                                 borderColor: isInputWrong ? "red" : "#DFDFDE"
                             },

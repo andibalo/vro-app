@@ -68,7 +68,14 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <StatusBar barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'} />
-      <Stack>
+      <Stack
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: theme.background.val,
+          },
+          headerTintColor: theme.color.val,
+        }}
+      >
         <Stack.Screen
           name="(tabs)"
           options={{

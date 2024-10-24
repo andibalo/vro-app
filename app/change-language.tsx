@@ -35,7 +35,7 @@ export default function ChangeLanguageScreen() {
                     languages.map(lang =>
                         <Pressable key={lang.langCode} onPress={() => changeLanguage(lang.langCode)}>
                             <XStack p="$2" justifyContent="space-between" alignItems="center" >
-                                <Text color={lang.langCode === currentLanguage ? "$blue10" : "black"} >
+                                <Text color={lang.langCode === currentLanguage ? "$blue10" : "$color"} >
                                     {`${lang.name} (${lang.langCode})`}
                                 </Text>
                                 {

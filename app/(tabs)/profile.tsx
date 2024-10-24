@@ -57,7 +57,7 @@ export default function ProfileScreen() {
                         checked={themeContext.theme === "dark"}
                         onCheckedChange={(isChecked) => themeContext.updateTheme(isChecked ? "dark" : "light")}
                         size="$3"
-                        bg={themeContext.theme === "dark" ? "black" : "$gray7"}
+                        bg={themeContext.theme === "dark" ? "$color" : "$gray7"}
                     >
                         <Switch.Thumb animation="quicker" />
                     </Switch>

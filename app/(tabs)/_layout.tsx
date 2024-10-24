@@ -10,7 +10,6 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "black",
         tabBarStyle: {
           backgroundColor: theme.background.val,
           borderTopColor: theme.borderColor.val,
@@ -27,7 +26,7 @@ export default function TabLayout() {
         options={{
           title: t('tabs.home'),
           tabBarIcon: ({ color }) => <Home color={color} />,
-          headerTitle:  t('home.headerTitle', {name: "Andi"})
+          headerTitle: t('home.headerTitle', { name: "Andi" })
         }}
       />
       <Tabs.Screen

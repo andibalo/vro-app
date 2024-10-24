@@ -1,16 +1,23 @@
-import { useColorScheme } from 'react-native'
 import { TamaguiProvider, type TamaguiProviderProps } from 'tamagui'
 import { ToastProvider, ToastViewport } from '@tamagui/toast'
 import { CurrentToast } from './CurrentToast'
 import { config } from '../tamagui.config'
+import { useContext } from 'react'
+import { ThemeContext } from '../context'
 
 export function Provider({ children, ...rest }: Omit<TamaguiProviderProps, 'config'>) {
-  const colorScheme = useColorScheme()
-  
+  const themeContext = useContext(ThemeContext);
+
+  if (!themeContext) {
+    throw new Error(
+      "Provider has to be used within <ThemeContext.Provider>"
+    );
+  }
+
   return (
     <TamaguiProvider
       config={config}
-      defaultTheme={colorScheme === 'dark' ? 'dark' : 'light'}
+      defaultTheme={themeContext.theme === "dark" ? 'dark' : 'light'}
       {...rest}
     >
       <ToastProvider
