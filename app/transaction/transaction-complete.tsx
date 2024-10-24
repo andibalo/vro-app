@@ -6,11 +6,13 @@ import { CircleCheckBig, CircleX } from '@tamagui/lucide-icons'
 import { formatNumberToRupiah } from '../../utils'
 import dayjs from 'dayjs'
 import { TransactionStatus } from 'types'
+import { useTranslation } from 'react-i18next'
 
 export default function TransactionCompleteScreen() {
     const { trxID } = useLocalSearchParams<{ trxID: string }>()
     const transaction = useSelector((state: RootState) => state.transaction.find(transaction => transaction.id === trxID))
     const navigation = useNavigation()
+    const { t } = useTranslation();
 
     return (
         <View flex={1} bg={transaction?.status === TransactionStatus.Success ? "$blue10" : "$red10"} px="$4" py="$3">
@@ -27,15 +29,15 @@ export default function TransactionCompleteScreen() {
                             }
                             {
                                 transaction.status === TransactionStatus.Success ?
-                                    <Text color="white" fontSize={26} fontWeight="bold" mb="$2">Transaction Success!</Text> :
-                                    <Text color="white" fontSize={26} fontWeight="bold" mb="$2">Transaction Failed</Text>
+                                    <Text color="white" fontSize={26} fontWeight="bold" mb="$2">{t('transaction.trxComplete.trxSuccess')}</Text> :
+                                    <Text color="white" fontSize={26} fontWeight="bold" mb="$2">{t('transaction.trxComplete.trxFail')}</Text>
                             }
                             <Text color="black" fontWeight="bold" fontSize={18} mb="$2">
                                 {transaction.name}
                             </Text>
                             <View alignItems="center" mb="$2">
                                 <Text color="white">
-                                    Payment Of
+                                    {t('transaction.trxComplete.paymentOf')}
                                 </Text>
                                 <Text color="white" fontSize={24} fontWeight="bold">
                                     {formatNumberToRupiah(transaction.value)}
@@ -55,7 +57,7 @@ export default function TransactionCompleteScreen() {
                             navigation.navigate("index")
                         }}
                     >
-                        Close
+                        {t('components.btn.closeBtn')}
                     </Button>
                 </YStack>
             }

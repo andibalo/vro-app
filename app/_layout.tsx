@@ -9,6 +9,8 @@ import { Provider } from './Provider'
 import { useTheme } from 'tamagui'
 import { Provider as ReduxProvider } from 'react-redux'
 import { store } from 'redux/store'
+import '../i18n';
+import { useTranslation } from 'react-i18next'
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -58,6 +60,8 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 function RootLayoutNav() {
   const colorScheme = useColorScheme()
   const theme = useTheme()
+  const { t } = useTranslation();
+
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <StatusBar barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'} />
@@ -66,6 +70,12 @@ function RootLayoutNav() {
           name="(tabs)"
           options={{
             headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="change-language"
+          options={{
+            headerTitle: t('changeLanguage.headerTitle')
           }}
         />
         <Stack.Screen
@@ -78,37 +88,37 @@ function RootLayoutNav() {
         <Stack.Screen
           name="transaction/detail"
           options={{
-            headerTitle: "Transaction Detail"
+            headerTitle: t('transaction.detail.headerTitle')
           }}
         />
         <Stack.Screen
           name="transaction/bpjs"
           options={{
-            headerTitle: "Bayar BPJS"
+            headerTitle: t('transaction.bpjs.headerTitle')
           }}
         />
         <Stack.Screen
           name="transaction/pln"
           options={{
-            headerTitle: "PLN Token"
+            headerTitle: t('transaction.pln.headerTitle')
           }}
         />
         <Stack.Screen
           name="transaction/pulsa"
           options={{
-            headerTitle: "Isi Pulsa"
+            headerTitle: t('transaction.pulsa.headerTitle')
           }}
         />
         <Stack.Screen
           name="transaction/confirm-transaction"
           options={{
-            headerTitle: "Confirm Transaction"
+            headerTitle: t('transaction.confirmTrx.headerTitle')
           }}
         />
         <Stack.Screen
           name="transaction/pin-validation"
           options={{
-            headerTitle: "Input PIN"
+            headerTitle: t('transaction.pinValidation.headerTitle')
           }}
         />
         <Stack.Screen

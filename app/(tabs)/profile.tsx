@@ -1,7 +1,15 @@
 import { ChevronRight } from '@tamagui/lucide-icons'
+import { useNavigation } from 'expo-router'
+import { Pressable } from 'react-native'
 import { Text, View, YStack, Avatar, XStack, Separator, Switch, Image } from 'tamagui'
+import { useTranslation } from 'react-i18next'
+import { languageCodeToLabelMap } from '../../constants'
 
 export default function ProfileScreen() {
+    const navigation = useNavigation()
+    const { t , i18n} = useTranslation();
+    const currentLanguage = i18n.language;
+
     return (
         <View flex={1} px="$4" py="$3" bg="$background">
             <YStack alignItems="center" mb="$5">
@@ -19,18 +27,23 @@ export default function ProfileScreen() {
                 </YStack>
             </YStack>
             <YStack flex={1}>
-                <XStack py="$3" justifyContent="space-between">
-                    <Text>Change Language</Text>
-                    <XStack alignItems="center" gap="$1">
-                        <Text color="$blue10">EN</Text>
-                        <View>
-                            <ChevronRight />
-                        </View>
+                <Pressable onPress={() => {
+                    // @ts-ignore
+                    navigation.navigate("change-language")
+                }} >
+                    <XStack py="$3" justifyContent="space-between">
+                        <Text>{t('profile.changeLang')}</Text>
+                        <XStack alignItems="center" gap="$1">
+                            <Text color="$blue10">{languageCodeToLabelMap[currentLanguage]}</Text>
+                            <View>
+                                <ChevronRight />
+                            </View>
+                        </XStack>
                     </XStack>
-                </XStack>
+                </Pressable>
                 <Separator my="$2" />
                 <XStack py="$3" justifyContent="space-between">
-                    <Text>Dark Mode</Text>
+                    <Text>{t('profile.darkMode')}</Text>
                     <Switch size="$3">
                         <Switch.Thumb animation="quicker" />
                     </Switch>

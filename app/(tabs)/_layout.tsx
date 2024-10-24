@@ -1,9 +1,11 @@
 import { Tabs } from 'expo-router'
 import { useTheme } from 'tamagui'
 import { Home, History, User } from '@tamagui/lucide-icons'
+import { useTranslation } from "react-i18next";
 
 export default function TabLayout() {
   const theme = useTheme()
+  const { t } = useTranslation();
 
   return (
     <Tabs
@@ -23,7 +25,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: t('tabs.home'),
           tabBarIcon: ({ color }) => <Home color={color} />,
           headerTitle: "Hello, Andi"
         }}
@@ -31,14 +33,14 @@ export default function TabLayout() {
       <Tabs.Screen
         name="transaction-history"
         options={{
-          title: 'Transaction History',
+          title: t('tabs.trxHistory'),
           tabBarIcon: ({ color }) => <History color={color} />,
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile',
+          title: t('tabs.profile'),
           tabBarIcon: ({ color }) => <User color={color} />,
         }}
       />

@@ -3,9 +3,11 @@ import { useNavigation } from 'expo-router'
 import { Pressable } from 'react-native'
 import { Text, View, Image, XStack, YStack } from 'tamagui'
 import { Smartphone } from '@tamagui/lucide-icons'
+import { useTranslation } from 'react-i18next'
 
 export default function HomeScreen() {
   const navigation = useNavigation()
+  const { t } = useTranslation();
 
   return (
     <View flex={1} bg="$background">
@@ -21,7 +23,7 @@ export default function HomeScreen() {
         />
       </View>
       <View px="$4">
-        <Text fontWeight="bold" fontSize={18} mb="$3">Our Services</Text>
+        <Text fontWeight="bold" fontSize={18} mb="$3">{t('home.ourServices')}</Text>
         <View>
           <XStack gap="$5">
             <Pressable onPress={() => {

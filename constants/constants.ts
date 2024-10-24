@@ -10,6 +10,18 @@ export const transactionTypeToInputTitleMap = {
     [TRANSACTION_TYPE_PLN_TOKEN]: "ID Pelanggan",
 }
 
+export const transactionTypeToInputTitleTlKeyMap = {
+    [TRANSACTION_TYPE_BPJS]: "transaction.bpjs.inputNumTitle",
+    [TRANSACTION_TYPE_PULSA]: "transaction.pulsa.inputNumTitle",
+    [TRANSACTION_TYPE_PLN_TOKEN]: "transaction.pln.inputNumTitle",
+}
+
+// Language
+export const languageCodeToLabelMap = {
+    "en-US": "English (en-US)",
+    "id-ID": "Bahasa Indonesia"
+}
+
 // PIN
 export const BIRTH_DATE_PIN: string = "120300"
 
@@ -27,12 +39,12 @@ const OPERATOR_TELKOMSEL: IPhoneOperator = {
 
 const OPERATOR_INDOSAT_OOREDEOO: IPhoneOperator = {
     name: "Indosat Ooredeoo",
-    imgURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsWzyumm3LMVK9q6qDglsI-Ahm0WmqJzFYLA&s"
+    imgURL: "https://seeklogo.com/images/I/indosat-ooredoo-logo-1020D6C606-seeklogo.com.png"
 }
 
 const OPERATOR_XL_AXIATA: IPhoneOperator = {
     name: "XL Axiata",
-    imgURL: "https://w7.pngwing.com/pngs/43/821/png-transparent-xl-axiata-telecommunication-logo-axiata-group-xl-xplor-id-angle-text-people.png"
+    imgURL: "https://upload.wikimedia.org/wikipedia/id/thumb/5/55/XL_logo_2016.svg/1200px-XL_logo_2016.svg.png"
 }
 
 const OPERATOR_AXIS: IPhoneOperator = {

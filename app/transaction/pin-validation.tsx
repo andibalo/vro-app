@@ -12,12 +12,14 @@ import { plnTokenItemsList } from './pln';
 import { bpjsItemsList } from './bpjs';
 import { pulsaItemsList } from './pulsa';
 import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withRepeat, withSequence, withSpring, withTiming } from 'react-native-reanimated'
+import { useTranslation } from 'react-i18next';
 
 export default function PINValidationScreen() {
     const { transactionType, itemID, data } = useLocalSearchParams<{ transactionType: string, itemID: string, data: string }>()
     const [attemptCount, setAttemptCount] = useState<number>(0)
     const [itemData, setItemData] = useState<any>({})
     const [isInputWrong, setIsInputWrong] = useState(false)
+    const { t } = useTranslation();
 
     const dispatch = useDispatch()
     const navigation = useNavigation()
@@ -146,7 +148,7 @@ export default function PINValidationScreen() {
     return (
         <View flex={1} alignItems="center" justifyContent="center" bg="$background">
             <Text fontSize={20} color="$black10" fontWeight="bold" mb="$3">
-                Masukkan PIN Anda
+                {t('transaction.pinValidation.title')}
             </Text>
             <Animated.View style={[rShakeStyle]}>
                 <View px="$8">

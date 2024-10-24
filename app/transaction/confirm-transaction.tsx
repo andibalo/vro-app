@@ -1,4 +1,4 @@
-import { TRANSACTION_TYPE_PLN_TOKEN, TRANSACTION_TYPE_BPJS, TRANSACTION_TYPE_PULSA, transactionTypeToInputTitleMap, phonePrefixToINDOperatorMap } from '../../constants';
+import { TRANSACTION_TYPE_PLN_TOKEN, TRANSACTION_TYPE_BPJS, TRANSACTION_TYPE_PULSA, phonePrefixToINDOperatorMap, transactionTypeToInputTitleTlKeyMap } from '../../constants';
 import { formatNumberToRupiah } from '../../utils'
 import { useLocalSearchParams, useNavigation } from 'expo-router'
 import { useEffect, useState } from 'react';
@@ -6,12 +6,14 @@ import { Text, View, Input, YStack, Button, XStack, Separator, Image } from 'tam
 import { plnTokenItemsList } from './pln';
 import { bpjsItemsList } from './bpjs';
 import { pulsaItemsList } from './pulsa';
+import { useTranslation } from 'react-i18next';
 
 
 export default function ConfirmTransactionScreen() {
     const { data, transactionType, itemID } = useLocalSearchParams<{ transactionType: string, data: string, itemID: string }>()
     const [itemData, setItemData] = useState<any>({})
     const navigation = useNavigation()
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (transactionType === TRANSACTION_TYPE_PLN_TOKEN) {
@@ -74,14 +76,14 @@ export default function ConfirmTransactionScreen() {
             <YStack flex={1} justifyContent="space-between">
                 <View mt="$4" flex={1}>
                     <View mb="$4">
-                        <Text mb="$2">{transactionTypeToInputTitleMap[transactionType]}</Text>
+                        <Text mb="$2">{t(transactionTypeToInputTitleTlKeyMap[transactionType])}</Text>
                         <Input
                             value={data}
                             readOnly
                         />
                     </View>
                     <View>
-                        <Text fontSize={18} fontWeight="bold" mb="$3">Transaction Detail</Text>
+                        <Text fontSize={18} fontWeight="bold" mb="$3">{t('transaction.confirmTrx.trxDetail')}</Text>
                         <XStack justifyContent="center" mb="$3">
                             <Image
                                 source={{
@@ -97,20 +99,20 @@ export default function ConfirmTransactionScreen() {
                                 transactionType === TRANSACTION_TYPE_PULSA &&
                                 <XStack justifyContent="space-between" alignItems="center">
                                     <Text color="$gray10">
-                                        Operator Name
+                                        {t('transaction.confirmTrx.operatorName')}
                                     </Text>
                                     <Text>{phonePrefixToINDOperatorMap[phonePrefix].name}</Text>
                                 </XStack>
                             }
                             <XStack justifyContent="space-between" alignItems="center">
                                 <Text color="$gray10">
-                                    Product Name
+                                    {t('transaction.confirmTrx.productName')}
                                 </Text>
                                 <Text>{itemData.name}</Text>
                             </XStack>
                             <XStack justifyContent="space-between" alignItems="center">
                                 <Text color="$gray10">
-                                    Price
+                                    {t('transaction.confirmTrx.price')}
                                 </Text>
                                 <Text>{formatNumberToRupiah(itemData.value)}</Text>
                             </XStack>
@@ -118,14 +120,14 @@ export default function ConfirmTransactionScreen() {
                         <Separator my={"$2"} />
                         <XStack justifyContent="space-between" alignItems="center" >
                             <Text fontSize={16} fontWeight="bold">
-                                Total Payment
+                                {t('transaction.confirmTrx.totalPayment')}
                             </Text>
                             <Text fontSize={16} fontWeight="bold">{formatNumberToRupiah(itemData.value)}</Text>
                         </XStack>
                     </View>
                 </View>
                 <View>
-                    <Button theme="active" backgroundColor={"$blue10"} color="white" onPress={handleOnSubmit}>Confirm</Button>
+                    <Button theme="active" backgroundColor={"$blue10"} color="white" onPress={handleOnSubmit}>{t('components.btn.confirmBtn')}</Button>
                 </View>
             </YStack >
         </View >

@@ -6,10 +6,12 @@ import dayjs from 'dayjs'
 import { ITransaction, TransactionStatus } from '../../types'
 import { FlatList, ListRenderItem, Pressable } from 'react-native';
 import { useNavigation } from 'expo-router'
+import { useTranslation } from 'react-i18next'
 
 export default function TransactionHistoryScreen() {
   const transactions = useSelector((state: RootState) => state.transaction)
   const navigation = useNavigation()
+  const { t } = useTranslation();
 
   const renderTransactionItem: ListRenderItem<ITransaction> = ({ item: transaction }) => (
     <Pressable onPress={() => {
@@ -46,7 +48,7 @@ export default function TransactionHistoryScreen() {
           />
           :
           <View flex={1} justifyContent="center" alignItems="center">
-            <Text fontSize={24} fontWeight="bold" color="$blue10">No Transactions Found</Text>
+            <Text fontSize={24} fontWeight="bold" color="$blue10">{t('trxHistory.noTrxFound')}</Text>
           </View>
       }
     </View>

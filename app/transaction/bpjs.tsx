@@ -1,6 +1,7 @@
 import { formatNumberToRupiah } from '../../utils'
 import { useLocalSearchParams, useNavigation } from 'expo-router'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next';
 import { Pressable } from 'react-native';
 import { Text, View, Input, YStack, Button, XStack, ScrollView } from 'tamagui'
 
@@ -53,6 +54,7 @@ export default function BPJSTransactionScreen() {
     const [currentPickedItem, setCurrentPickedItem] = useState<BPJSItem | null>(null)
     const { data, transactionType } = useLocalSearchParams<{ transactionType: string, data: string }>()
     const navigation = useNavigation()
+    const { t } = useTranslation();
 
     const handleOnItemPress = (itemData: BPJSItem) => {
         setCurrentPickedItem(itemData)
@@ -73,7 +75,7 @@ export default function BPJSTransactionScreen() {
             <YStack flex={1} justifyContent="space-between">
                 <View mt="$4" flex={1}>
                     <View>
-                        <Text mb="$2">Nomor BPJS</Text>
+                        <Text mb="$2">{t('transaction.bpjs.inputNumTitle')}</Text>
                         <Input
                             value={data}
                             readOnly
@@ -95,7 +97,7 @@ export default function BPJSTransactionScreen() {
                                             <Pressable onPress={() => handleOnItemPress(item)}>
                                                 <View p="$3" w="100%" h="100%">
                                                     <Text color={item.id === currentPickedItem?.id ? "$blue10" : "black"} fontSize={18} fontWeight="bold" mb="$2">{item.valueName}</Text>
-                                                    <Text fontSize={12} color={item.id === currentPickedItem?.id ? "$blue10" : "$gray10"}>Price</Text>
+                                                    <Text fontSize={12} color={item.id === currentPickedItem?.id ? "$blue10" : "$gray10"}>{t('transaction.bpjs.price')}</Text>
                                                     <Text color={item.id === currentPickedItem?.id ? "$blue10" : "black"}>{formatNumberToRupiah(item.value)}</Text>
                                                 </View>
                                             </Pressable>
@@ -113,7 +115,7 @@ export default function BPJSTransactionScreen() {
                         color="white"
                         onPress={handleOnSubmit}
                     >
-                        Continue
+                        {t('components.btn.continueBtn')}
                     </Button>
                 </View>
             </YStack >

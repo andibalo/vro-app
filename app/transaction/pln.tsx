@@ -1,6 +1,7 @@
 import { formatNumberToRupiah } from '../../utils'
 import { useLocalSearchParams, useNavigation } from 'expo-router'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next';
 import { Pressable } from 'react-native';
 import { Text, View, Input, YStack, Button, XStack, ScrollView } from 'tamagui'
 
@@ -58,6 +59,7 @@ export default function PLNTransactionScreen() {
     const [currentPickedItem, setCurrentPickedItem] = useState<PLNTokenItem | null>(null)
     const { data, transactionType } = useLocalSearchParams<{ transactionType: string, data: string }>()
     const navigation = useNavigation()
+    const { t } = useTranslation();
 
     const handleOnItemPress = (itemData: PLNTokenItem) => {
         setCurrentPickedItem(itemData)
@@ -77,7 +79,7 @@ export default function PLNTransactionScreen() {
             <YStack flex={1} justifyContent="space-between">
                 <View mt="$4" flex={1}>
                     <View>
-                        <Text mb="$2">ID Pelanggan</Text>
+                        <Text mb="$2">{t('transaction.pln.inputNumTitle')}</Text>
                         <Input
                             value={data}
                             readOnly
@@ -99,7 +101,7 @@ export default function PLNTransactionScreen() {
                                             <Pressable onPress={() => handleOnItemPress(item)}>
                                                 <View p="$3" w="100%" h="100%">
                                                     <Text color={item.id === currentPickedItem?.id ? "$blue10" : "black"} fontSize={18} fontWeight="bold" mb="$2">{item.valueName}</Text>
-                                                    <Text fontSize={12} color={item.id === currentPickedItem?.id ? "$blue10" : "$gray10"}>Price</Text>
+                                                    <Text fontSize={12} color={item.id === currentPickedItem?.id ? "$blue10" : "$gray10"}>{t('transaction.pln.price')}</Text>
                                                     <Text color={item.id === currentPickedItem?.id ? "$blue10" : "black"}>{formatNumberToRupiah(item.value)}</Text>
                                                 </View>
                                             </Pressable>
@@ -117,7 +119,7 @@ export default function PLNTransactionScreen() {
                         color="white"
                         onPress={handleOnSubmit}
                     >
-                        Continue
+                        {t('components.btn.continueBtn')}
                     </Button>
                 </View>
             </YStack >

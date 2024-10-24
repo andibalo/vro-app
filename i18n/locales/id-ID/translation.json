@@ -1,0 +1,74 @@
+{
+    "tabs": {
+        "home": "Beranda",
+        "trxHistory": "Riwayat Transaksi",
+        "profile": "Profil"
+    },
+    "home": {
+      "ourServices": "Layanan Kami"
+    },
+    "trxHistory": {
+        "noTrxFound": "Belum Ada Transaksi"
+    },
+    "profile": {
+        "changeLang": "Ganti Bahasa",
+        "darkMode": "Mode Gelap"
+    },
+    "changeLanguage": {
+        "headerTitle": "Ganti Bahasa"
+    },
+    "transaction": {
+        "pln": {
+          "headerTitle": "PLN Token",
+          "inputNumTitle": "ID Pelanggan",
+          "inputNumPlaceholder": "Masukkan ID Pelanggan",
+          "price": "Harga"
+        },
+        "pulsa": {
+            "headerTitle": "Isi Pulsa",
+            "inputNumTitle": "Nomor Telepon",
+            "inputNumPlaceholder": "Masukkan Nomor Telepon",
+            "price": "Harga"
+        },
+        "bpjs": {
+            "headerTitle": "Bayar BPJS",
+            "inputNumTitle": "Nomor BPJS",
+            "inputNumPlaceholder": "Masukkan Nomor BPJS",
+            "price": "Harga"
+        },
+        "pinValidation": {
+          "headerTitle": "Masukkan PIN",
+          "title": "Masukkan PIN Anda"
+        },
+        "confirmTrx": {
+            "headerTitle": "Konfirmasi Transaksi",
+            "trxDetail": "Detail Transaksi",
+            "operatorName": "Nama Operator",
+            "productName": "Nama Produk",
+            "price": "Harga",
+            "totalPayment": "Total Pembayaran"
+        },
+        "detail": {
+          "headerTitle": "Detail Transaksi",
+          "trxID": "ID Transaksi",
+          "trxType": "Tipe Transaksi",
+          "operatorName": "Nama Operator",
+          "productName": "Nama Produk",
+          "trxDate": "Tgl. Transaksi",
+          "trxStatus": "Status Transaksi",
+          "trxTotalPaid": "Jumlah Dibayar"
+        },
+        "trxComplete": {
+            "trxSuccess": "Transaksi Berhasil!",
+            "trxFail": "Transaksi Gagal",
+            "paymentOf": "Pembayaran Sebesar"
+        }
+    },
+    "components": {
+        "btn": {
+            "continueBtn": "Lanjut",
+            "closeBtn": "Tutup",
+            "confirmBtn": "Konfirmasi"
+        }
+    }
+  }

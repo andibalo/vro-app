@@ -5,11 +5,13 @@ import { Text, View, YStack, XStack, Separator, Image } from 'tamagui'
 import { formatNumberToRupiah } from '../../utils'
 import dayjs from 'dayjs'
 import { TransactionStatus } from 'types'
-import { phonePrefixToINDOperatorMap, TRANSACTION_TYPE_PULSA, TRANSACTION_TYPE_PLN_TOKEN, TRANSACTION_TYPE_BPJS, transactionTypeToInputTitleMap } from '../../constants'
+import { phonePrefixToINDOperatorMap, TRANSACTION_TYPE_PULSA, TRANSACTION_TYPE_PLN_TOKEN, TRANSACTION_TYPE_BPJS, transactionTypeToInputTitleTlKeyMap } from '../../constants'
+import { useTranslation } from 'react-i18next'
 
 export default function TransactionDetailScreen() {
     const { trxID } = useLocalSearchParams<{ trxID: string }>()
     const transaction = useSelector((state: RootState) => state.transaction.find(transaction => transaction.id === trxID))
+    const { t } = useTranslation();
 
     const resolveImageURI = (transactionType: string): string => {
 
@@ -47,19 +49,19 @@ export default function TransactionDetailScreen() {
                     <YStack flex={1} gap="$3">
                         <XStack justifyContent="space-between" alignItems="center">
                             <Text color="$gray10">
-                                Transaction ID
+                                {t('transaction.detail.trxID')}
                             </Text>
                             <Text>{transaction.id}</Text>
                         </XStack>
                         <XStack justifyContent="space-between" alignItems="center">
                             <Text color="$gray10">
-                                Transaction Type
+                                {t('transaction.detail.trxType')}
                             </Text>
                             <Text>{transaction.type}</Text>
                         </XStack>
                         <XStack justifyContent="space-between" alignItems="center">
                             <Text color="$gray10">
-                                {transactionTypeToInputTitleMap[transaction.type]}
+                                {t(transactionTypeToInputTitleTlKeyMap[transaction.type])}
                             </Text>
                             <Text>{transaction.number}</Text>
                         </XStack>
@@ -67,39 +69,38 @@ export default function TransactionDetailScreen() {
                             transaction.type === TRANSACTION_TYPE_PULSA &&
                             <XStack justifyContent="space-between" alignItems="center">
                                 <Text color="$gray10">
-                                    Operator Name
+                                    {t('transaction.detail.operatorName')}
                                 </Text>
                                 <Text>{phonePrefixToINDOperatorMap[transaction.number.slice(0, 4)].name}</Text>
                             </XStack>
                         }
                         <XStack justifyContent="space-between" alignItems="center">
                             <Text color="$gray10">
-                                Product Name
+                                {t('transaction.detail.productName')}
                             </Text>
                             <Text>{transaction.name}</Text>
                         </XStack>
                         <XStack justifyContent="space-between" alignItems="center">
                             <Text color="$gray10">
-                                Transaction Date
+                                {t('transaction.detail.trxDate')}
                             </Text>
                             <Text>{dayjs(transaction.createdAt).format("YYYY-MM-DD, HH:mm:ss")}</Text>
                         </XStack>
                         <XStack justifyContent="space-between" alignItems="center">
                             <Text color="$gray10">
-                                Transaction Status
+                                {t('transaction.detail.trxStatus')}
                             </Text>
                             <Text color={transaction.status === TransactionStatus.Success ? "$green10" : "$red10"}>{transaction.status}</Text>
                         </XStack>
                         <Separator />
                         <XStack justifyContent="space-between" alignItems="center">
                             <Text fontSize={16} fontWeight="bold">
-                                Total Paid
+                                {t('transaction.detail.trxTotalPaid')}
                             </Text>
                             <Text fontSize={16} fontWeight="bold">{formatNumberToRupiah(transaction.value)}</Text>
                         </XStack>
                     </YStack>
                 </View>
-
             }
         </View>
     )

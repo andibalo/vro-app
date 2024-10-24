@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Pressable } from 'react-native';
 import { Text, View, Input, YStack, Button, XStack, ScrollView } from 'tamagui'
 import { formatNumberToRupiah } from '../../utils'
+import { useTranslation } from 'react-i18next';
 interface PulsaItem {
     id: string;
     name: string;
@@ -81,6 +82,7 @@ export default function PulsaTransactionScreen() {
     const [currentPickedItem, setCurrentPickedItem] = useState<PulsaItem | null>(null)
     const { data, transactionType } = useLocalSearchParams<{ transactionType: string, data: string }>()
     const navigation = useNavigation()
+    const { t } = useTranslation();
 
     const handleOnItemPress = (itemData: PulsaItem) => {
         setCurrentPickedItem(itemData)
@@ -100,7 +102,7 @@ export default function PulsaTransactionScreen() {
             <YStack flex={1} justifyContent="space-between">
                 <View mt="$4" flex={1}>
                     <View>
-                        <Text mb="$2">Nomor Telepon</Text>
+                        <Text mb="$2">{t('transaction.pulsa.inputNumTitle')}</Text>
                         <Input
                             value={data}
                             readOnly
@@ -122,7 +124,7 @@ export default function PulsaTransactionScreen() {
                                             <Pressable onPress={() => handleOnItemPress(item)}>
                                                 <View p="$3" w="100%" h="100%">
                                                     <Text color={item.id === currentPickedItem?.id ? "$blue10" : "black"} fontSize={18} fontWeight="bold" mb="$2">{item.valueName}</Text>
-                                                    <Text fontSize={12} color={item.id === currentPickedItem?.id ? "$blue10" : "$gray10"}>Price</Text>
+                                                    <Text fontSize={12} color={item.id === currentPickedItem?.id ? "$blue10" : "$gray10"}>{t('transaction.pulsa.price')}</Text>
                                                     <Text color={item.id === currentPickedItem?.id ? "$blue10" : "black"}>{formatNumberToRupiah(item.value)}</Text>
                                                 </View>
                                             </Pressable>
@@ -140,7 +142,7 @@ export default function PulsaTransactionScreen() {
                         color="white"
                         onPress={handleOnSubmit}
                     >
-                        Continue
+                        {t('components.btn.continueBtn')}
                     </Button>
                 </View>
             </YStack >

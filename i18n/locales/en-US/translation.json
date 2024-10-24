@@ -1,0 +1,74 @@
+{
+    "tabs": {
+        "home": "Home",
+        "trxHistory": "Transaction History",
+        "profile": "Profile"
+    },
+    "home": {
+      "ourServices": "Our Services"
+    },
+    "trxHistory": {
+        "noTrxFound": "No Transactions Found"
+    },
+    "profile": {
+        "changeLang": "Change Language",
+        "darkMode": "Dark Mode"
+    },
+    "changeLanguage": {
+      "headerTitle": "Change Language"
+    },
+    "transaction": {
+      "pln": {
+        "headerTitle": "PLN Token",
+        "inputNumTitle": "Customer ID",
+        "inputNumPlaceholder": "Enter Customer ID",
+        "price": "Price"
+      },
+      "pulsa": {
+        "headerTitle": "Top Up Pulsa",
+        "inputNumTitle": "Phone Number",
+        "inputNumPlaceholder": "Enter Phone Number",
+        "price": "Price"
+      },
+      "bpjs": {
+        "headerTitle": "Pay BPJS",
+        "inputNumTitle": "BPJS Number",
+        "inputNumPlaceholder": "Enter BPJS Number",
+        "price": "Price"
+      },
+      "pinValidation": {
+        "headerTitle": "Input PIN",
+        "title": "Input Your PIN"
+      },
+      "confirmTrx": {
+        "headerTitle": "Confirm Transaction",
+        "trxDetail": "Transaction Detail",
+        "operatorName": "Operator Name",
+        "productName": "Product Name",
+        "price": "Price",
+        "totalPayment": "Total Payment"
+      },
+      "detail": {
+        "headerTitle": "Transaction Detail",
+        "trxID": "Transaction ID",
+        "trxType": "Transaction Type",
+        "operatorName": "Operator Name",
+        "productName": "Product Name",
+        "trxDate": "Transaction Date",
+        "trxStatus": "Transaction Status",
+        "trxTotalPaid": "Total Paid"
+      },
+      "trxComplete": {
+        "trxSuccess": "Transaction Success!",
+        "trxFail": "Transaction Failed",
+        "paymentOf": "Payment Of"
+      }
+    },
+    "components": {
+        "btn": {
+            "continueBtn": "Continue",
+            "closeBtn": "Close",
+            "confirmBtn": "Confirm"
+        }
+    }
+  }
