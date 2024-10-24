@@ -6,7 +6,7 @@ import { config } from '../tamagui.config'
 
 export function Provider({ children, ...rest }: Omit<TamaguiProviderProps, 'config'>) {
   const colorScheme = useColorScheme()
-
+  
   return (
     <TamaguiProvider
       config={config}

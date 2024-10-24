@@ -11,6 +11,7 @@ import { Provider as ReduxProvider } from 'react-redux'
 import { store } from 'redux/store'
 import '../i18n';
 import { useTranslation } from 'react-i18next'
+import { ThemeContextContextProvider } from '../context'
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -52,7 +53,9 @@ export default function RootLayout() {
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <ReduxProvider store={store}>
-      <Provider>{children}</Provider>
+      <ThemeContextContextProvider>
+        <Provider>{children}</Provider>
+      </ThemeContextContextProvider>
     </ReduxProvider>
   )
 }

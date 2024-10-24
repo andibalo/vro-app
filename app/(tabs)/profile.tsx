@@ -4,11 +4,20 @@ import { Pressable } from 'react-native'
 import { Text, View, YStack, Avatar, XStack, Separator, Switch, Image } from 'tamagui'
 import { useTranslation } from 'react-i18next'
 import { languageCodeToLabelMap } from '../../constants'
+import { useContext } from 'react'
+import { ThemeContext } from '../../context'
 
 export default function ProfileScreen() {
     const navigation = useNavigation()
-    const { t , i18n} = useTranslation();
+    const { t, i18n } = useTranslation();
     const currentLanguage = i18n.language;
+    const themeContext = useContext(ThemeContext);
+
+    if (!themeContext) {
+        throw new Error(
+            "ProfileScreen has to be used within <ThemeContext.Provider>"
+        );
+    }
 
     return (
         <View flex={1} px="$4" py="$3" bg="$background">
@@ -44,7 +53,12 @@ export default function ProfileScreen() {
                 <Separator my="$2" />
                 <XStack py="$3" justifyContent="space-between">
                     <Text>{t('profile.darkMode')}</Text>
-                    <Switch size="$3">
+                    <Switch
+                        checked={themeContext.theme === "dark"}
+                        onCheckedChange={(isChecked) => themeContext.updateTheme(isChecked ? "dark" : "light")}
+                        size="$3"
+                        bg={themeContext.theme === "dark" ? "black" : "$gray7"}
+                    >
                         <Switch.Thumb animation="quicker" />
                     </Switch>
                 </XStack>
