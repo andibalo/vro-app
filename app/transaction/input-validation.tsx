@@ -13,7 +13,6 @@ const transactionTypeToInputPlaceholderMap = {
     [TRANSACTION_TYPE_PLN_TOKEN]: "Masukkan ID Pelanggan",
 }
 
-
 const plnSchema = yup.object().shape({
     numInput: yup.
         string().
@@ -123,7 +122,7 @@ export default function TransactionInputValidationScreen() {
                             <Input
                                 placeholder={transactionTypeToInputPlaceholderMap[transactionType]}
                                 maxLength={inputMaxLength}
-                                keyboardType='number-pad'
+                                keyboardType='numeric'
                                 value={value}
                                 onChangeText={onChange}
                             />

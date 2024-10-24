@@ -2,7 +2,7 @@ import { useLocalSearchParams, useNavigation } from 'expo-router'
 import { Text, View } from 'tamagui'
 import { OtpInput } from "react-native-otp-entry";
 import { BIRTH_DATE_PIN, phonePrefixToINDOperatorMap, TRANSACTION_TYPE_BPJS, TRANSACTION_TYPE_PLN_TOKEN, TRANSACTION_TYPE_PULSA } from '../../constants';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTransaction } from '../../redux/slice/transaction';
 import { ITransaction, TransactionStatus } from '../../types'
@@ -11,13 +11,18 @@ import dayjs from 'dayjs'
 import { plnTokenItemsList } from './pln';
 import { bpjsItemsList } from './bpjs';
 import { pulsaItemsList } from './pulsa';
+import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withRepeat, withSequence, withSpring, withTiming } from 'react-native-reanimated'
 
 export default function PINValidationScreen() {
     const { transactionType, itemID, data } = useLocalSearchParams<{ transactionType: string, itemID: string, data: string }>()
     const [attemptCount, setAttemptCount] = useState<number>(0)
     const [itemData, setItemData] = useState<any>({})
+    const [isInputWrong, setIsInputWrong] = useState(false)
+
     const dispatch = useDispatch()
     const navigation = useNavigation()
+
+    const shakeTranslateX = useSharedValue(0)
 
     useEffect(() => {
         if (transactionType === TRANSACTION_TYPE_PLN_TOKEN) {
@@ -72,9 +77,43 @@ export default function PINValidationScreen() {
         }
     }, [attemptCount])
 
+
+    const setIsInputWrongToFalse = () => {
+        setIsInputWrong(false)
+    };
+
+    const shake = useCallback(() => {
+        let transalationVal = 10
+        let timingConfig = {
+            duration: 80,
+            easing: Easing.bezier(0.35, 0.7, 0.5, 0.7),
+        }
+
+        shakeTranslateX.value = withSequence(
+            withTiming(transalationVal, timingConfig),
+            withRepeat(withTiming(-transalationVal, timingConfig), 3, true),
+            withSpring(0, {
+                mass: 0.5
+            }, (finished) => {
+                if (finished) {
+                    // @ts-ignore
+                    runOnJS(setIsInputWrongToFalse)(null);
+                }
+            }),
+        )
+    }, [])
+
+    const rShakeStyle = useAnimatedStyle(() => {
+        return {
+            transform: [{ translateX: shakeTranslateX.value }],
+        }
+    }, [])
+
     const handlePINOnFilled = (text: string) => {
         if (text === BIRTH_DATE_PIN) {
             setAttemptCount((prev) => prev + 1)
+            setIsInputWrong(true)
+            shake()
             return
         }
 
@@ -109,13 +148,23 @@ export default function PINValidationScreen() {
             <Text fontSize={20} color="$black10" fontWeight="bold" mb="$3">
                 Masukkan PIN Anda
             </Text>
-            <View px="$8">
-                <OtpInput
-                    secureTextEntry
-                    numberOfDigits={6}
-                    onFilled={handlePINOnFilled}
-                />
-            </View>
+            <Animated.View style={[rShakeStyle]}>
+                <View px="$8">
+                    <OtpInput
+                        secureTextEntry
+                        numberOfDigits={6}
+                        onFilled={handlePINOnFilled}
+                        theme={{
+                            pinCodeContainerStyle: {
+                                borderColor: isInputWrong ? "red" : "#DFDFDE"
+                            },
+                            focusedPinCodeContainerStyle: {
+                                borderColor: isInputWrong ? "red" : "#A4D0A4"
+                            }
+                        }}
+                    />
+                </View>
+            </Animated.View>
         </View>
     )
 }
