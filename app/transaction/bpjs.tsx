@@ -60,10 +60,10 @@ export default function BPJSTransactionScreen() {
 
     const handleOnSubmit = () => {
         // @ts-ignore
-        navigation.navigate("transaction/pin-validation", {
+        navigation.navigate("transaction/confirm-transaction", {
             transactionType,
             data,
-            itemID: currentPickedItem?.id
+            itemID: currentPickedItem!.id
         })
     }
 
@@ -107,7 +107,14 @@ export default function BPJSTransactionScreen() {
                     </ScrollView>
                 </View>
                 <View>
-                    <Button theme="active" backgroundColor={"$blue10"} color="white" onPress={handleOnSubmit}>Continue</Button>
+                    <Button theme="active"
+                        disabled={currentPickedItem === null}
+                        backgroundColor={currentPickedItem === null ? "$gray10" : "$blue10"}
+                        color="white"
+                        onPress={handleOnSubmit}
+                    >
+                        Continue
+                    </Button>
                 </View>
             </YStack >
         </View >

@@ -1,5 +1,5 @@
 
-import { isValidINDPhoneOperatorPrefix, TRANSACTION_TYPE_BPJS, TRANSACTION_TYPE_PLN_TOKEN, TRANSACTION_TYPE_PULSA } from '../../constants'
+import { isValidINDPhoneOperatorPrefix, TRANSACTION_TYPE_BPJS, TRANSACTION_TYPE_PLN_TOKEN, TRANSACTION_TYPE_PULSA, transactionTypeToInputTitleMap } from '../../constants'
 import { useLocalSearchParams, useNavigation } from 'expo-router'
 import { useEffect, useState } from 'react'
 import { Text, View, YStack, Button, Input } from 'tamagui'
@@ -13,16 +13,12 @@ const transactionTypeToInputPlaceholderMap = {
     [TRANSACTION_TYPE_PLN_TOKEN]: "Masukkan ID Pelanggan",
 }
 
-const transactionTypeToInputTitleMap = {
-    [TRANSACTION_TYPE_BPJS]: "Nomor BPJS",
-    [TRANSACTION_TYPE_PULSA]: "Nomor Telepon",
-    [TRANSACTION_TYPE_PLN_TOKEN]: "ID Pelanggan",
-}
 
 const plnSchema = yup.object().shape({
     numInput: yup.
         string().
         required('ID Pelanggan is required').
+        test("numberOnly", "Must be only numbers", (value) => /^\d+$/.test(value)).
         test("doesNotStartWithZero", "First number must not be a 0", val => val.charAt(0) !== "0"),
 });
 
@@ -30,6 +26,7 @@ const bpjsSchema = yup.object().shape({
     numInput: yup.
         string().
         required('Nomor BPJS is required').
+        test("numberOnly", "Must be only numbers", (value) => /^\d+$/.test(value)).
         test("startWithZero", "First number must be a 0", val => val.charAt(0) === "0").
         test("len13", "Must be exactly 13 characters", val => val.length === 13),
 });
@@ -38,6 +35,7 @@ const pulsaSchema = yup.object().shape({
     numInput: yup.
         string().
         required('Nomor Telepon is required').
+        test("numberOnly", "Must be only numbers", (value) => /^\d+$/.test(value)).
         test("startWithZeroEight", "Number must start with 08", val => val.slice(0, 2) === "08").
         test("validINDOperatorPrefix", "Must be valid phone operator prefix in Indonesia", (val) => {
             let phonePrefix = isValidINDPhoneOperatorPrefix.find(prefix => prefix === val.slice(0, 4))

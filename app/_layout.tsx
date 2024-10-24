@@ -94,6 +94,12 @@ function RootLayoutNav() {
           }}
         />
         <Stack.Screen
+          name="transaction/confirm-transaction"
+          options={{
+            headerTitle: "Confirm Transaction"
+          }}
+        />
+        <Stack.Screen
           name="transaction/pin-validation"
           options={{
             headerTitle: "Input PIN"

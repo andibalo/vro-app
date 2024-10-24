@@ -4,6 +4,12 @@ export const TRANSACTION_TYPE_PLN_TOKEN = 'PLN_TOKEN';
 export const TRANSACTION_TYPE_PULSA = 'PULSA';
 export const TRANSACTION_TYPE_BPJS = 'BPJS';
 
+export const transactionTypeToInputTitleMap = {
+    [TRANSACTION_TYPE_BPJS]: "Nomor BPJS",
+    [TRANSACTION_TYPE_PULSA]: "Nomor Telepon",
+    [TRANSACTION_TYPE_PLN_TOKEN]: "ID Pelanggan",
+}
+
 // PIN
 export const BIRTH_DATE_PIN: string = "120300"
 
