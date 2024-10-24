@@ -27,7 +27,7 @@ export default function TabLayout() {
         options={{
           title: t('tabs.home'),
           tabBarIcon: ({ color }) => <Home color={color} />,
-          headerTitle: "Hello, Andi"
+          headerTitle:  t('home.headerTitle', {name: "Andi"})
         }}
       />
       <Tabs.Screen

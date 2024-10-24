@@ -54,7 +54,7 @@ const OPERATOR_AXIS: IPhoneOperator = {
 
 const OPERATOR_THREE: IPhoneOperator = {
     name: "Three",
-    imgURL: "https://w7.pngwing.com/pngs/354/974/png-transparent-three-uk-mobile-service-provider-company-three-ireland-mobile-broadband-outbound-thumbnail.png"
+    imgURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Three_logo.svg/1579px-Three_logo.svg.png"
 }
 
 const OPERATOR_SMARTFREN: IPhoneOperator = {
@@ -64,7 +64,7 @@ const OPERATOR_SMARTFREN: IPhoneOperator = {
 
 const OPERATOR_SAMPOERNA_TELKOM: IPhoneOperator = {
     name: "Sampoerna Telkom",
-    imgURL: "https://images.glints.com/unsafe/glints-dashboard.s3.amazonaws.com/company-logo/99834399742038000ec4f8108b55a794.jpg"
+    imgURL: "https://media.licdn.com/dms/image/v2/C560BAQETz9z2burE8Q/company-logo_200_200/company-logo_200_200/0/1630642385414?e=1737590400&v=beta&t=_OdaWEgbpI6uWOGjBxkV1RFiOznmQULsyBe4PPz4fqE"
 }
 
 const OPERATOR_BYRU_PASTI_SATELIT: IPhoneOperator = {

@@ -5,6 +5,7 @@
         "profile": "Profil"
     },
     "home": {
+      "headerTitle": "Halo, {{name}}",
       "ourServices": "Layanan Kami"
     },
     "trxHistory": {

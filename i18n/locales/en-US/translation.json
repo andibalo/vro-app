@@ -5,6 +5,7 @@
         "profile": "Profile"
     },
     "home": {
+      "headerTitle": "Hello, {{name}}",
       "ourServices": "Our Services"
     },
     "trxHistory": {
