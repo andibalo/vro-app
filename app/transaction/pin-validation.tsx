@@ -155,7 +155,7 @@ export default function PINValidationScreen() {
 
     return (
         <View flex={1} alignItems="center" justifyContent="center" bg="$background">
-            <Text fontSize={20} color="$black10" fontWeight="bold" mb="$3">
+            <Text fontSize={20} color="$color" fontWeight="bold" mb="$3">
                 {t('transaction.pinValidation.title')}
             </Text>
             <Animated.View style={[rShakeStyle]}>

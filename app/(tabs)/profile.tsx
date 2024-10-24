@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { languageCodeToLabelMap } from '../../constants'
 import { useContext } from 'react'
 import { ThemeContext } from '../../context'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function ProfileScreen() {
     const navigation = useNavigation()
@@ -17,6 +18,12 @@ export default function ProfileScreen() {
         throw new Error(
             "ProfileScreen has to be used within <ThemeContext.Provider>"
         );
+    }
+
+    const changeTheme = async (isDarkMode : boolean) => {
+        themeContext.updateTheme(isDarkMode ? "dark" : "light")
+            
+        await AsyncStorage.setItem("theme", isDarkMode ? "dark" : "light");
     }
 
     return (
@@ -55,7 +62,7 @@ export default function ProfileScreen() {
                     <Text>{t('profile.darkMode')}</Text>
                     <Switch
                         checked={themeContext.theme === "dark"}
-                        onCheckedChange={(isChecked) => themeContext.updateTheme(isChecked ? "dark" : "light")}
+                        onCheckedChange={(isChecked) => changeTheme(isChecked)}
                         size="$3"
                         bg={themeContext.theme === "dark" ? "$color" : "$gray7"}
                     >
