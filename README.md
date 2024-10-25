@@ -3,7 +3,7 @@
 
 vro-app is an assignment for UTS mobile cross platform. Inspired by vro.
 
-![Alt Text](https://media1.tenor.com/m/p6Vj8FTVydwAAAAd/tole-cat.gif)
+<img  src="https://i.redd.it/pa049v3v4tfc1.jpeg"  alt="vro"  width="350"/>
 
 ## Installation
 
