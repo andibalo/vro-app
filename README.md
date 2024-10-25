@@ -12,6 +12,11 @@ Ensure you have the following installed
 - node >= 21.7.3
 - yarn >= 4.5.0 
 
+Install dependencies by running:
+```
+yarn
+```
+
 Run development server by using the command below:
 ```
 npx expo start
